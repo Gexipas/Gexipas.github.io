@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<style>
+.grid {
+	position: absolute;
+	background-color: lightgrey;
+	width: 50px;
+	height: 50px;
+	border-color: black;
+	border-top: 2px;
+	border-left: 2px;
+	border-style: solid;
+	text-align: center;
+	font-size: 42px;	
+	user-select: none;
+}
+
+p{
+	margin: 0px;
+}
+
+.button{
+	position: absolute;
+	background-color: #f7db5c;
+	width: 50px;
+	height: 50px;
+	border-color: black;
+	border-top: 2px;
+	border-left: 2px;
+	border-style: solid;
+	text-align: center;
+	font-size: 42px;	
+	user-select: none;
+}
+
+.easy{
+position: absolute;
+top: 600px;
+left: 10px;
+}
+
+.med{
+position: absolute;
+top: 630px;
+left: 10px;
+}
+
+.hard{
+position: absolute;
+top: 660px;
+left: 10px;
+}
+
+.clear{
+position: absolute;
+top: 690px;
+left: 10px;
+}
+
+.hint{
+position: absolute;
+top: 600px;
+left: 160px;
+}
+
+.solve{
+position: absolute;
+top: 600px;
+left: 260px;
+}
+
+.jumble{
+position: absolute;
+top: 630px;
+left: 160px;
+}
+
+</style>
+</head>
+<body onload="Init()">
+	<script type="text/javascript" src="SudokuJS.js"></script>
+	<script type="text/javascript" src="Functions.js"></script>
+
+	<button class="easy" onclick="LoadNew(0)">New Easy Sudoku</button>
+	<button class="med" onclick="LoadNew(1)">New Med Sudoku</button>
+	<button class="hard" onclick="LoadNew(2)">New Hard Sudoku</button>
+	<button class="clear" onclick="Clear()">New Clear Sudoku</button>
+	<button class="hint" id ="hintButton" onclick="Hint()">Hints: 3</button>
+	<button class="solve" onclick="SolveRemaining()">Solve</button>
+	<button class="jumble" onclick="ToggleJumble()">Jumble Mode</button>
+
+	<!---->
+	<div class="button" id="button1"><p>1</p></div>
+	<div class="button" id="button2"><p>2</p></div>
+	<div class="button" id="button3"><p>3</p></div>
+
+	<div class="button" id="button4"><p>4</p></div>
+	<div class="button" id="button5"><p>5</p></div>
+	<div class="button" id="button6"><p>6</p></div>
+
+	<div class="button" id="button7"><p>7</p></div>
+	<div class="button" id="button8"><p>8</p></div>
+	<div class="button" id="button9"><p>9</p></div>
+	<div class="button" id="button0"><p>0</p></div>
+
+	<!---->
+	<div class="grid" id="11"><p>1</p></div>
+	<div class="grid" id="21"><p>2</p></div>
+	<div class="grid" id="31"><p>3</p></div>
+
+	<div class="grid" id="41"><p>4</p></div>
+	<div class="grid" id="51"><p>5</p></div>
+	<div class="grid" id="61"><p>6</p></div>
+
+	<div class="grid" id="71"><p>7</p></div>
+	<div class="grid" id="81"><p>8</p></div>
+	<div class="grid" id="91"><p>9</p></div>
+
+	<!---->
+	<div class="grid" id="12"><p>2</p></div>
+	<div class="grid" id="22"><p>2</p></div>
+	<div class="grid" id="32"><p>2</p></div>
+	<div class="grid" id="42"><p>2</p></div>
+	<div class="grid" id="52"><p>2</p></div>
+	<div class="grid" id="62"><p>2</p></div>
+	<div class="grid" id="72"><p>2</p></div>
+	<div class="grid" id="82"><p>2</p></div>
+	<div class="grid" id="92"><p>2</p></div>
+
+	<!---->
+	<div class="grid" id="13"><p>3</p></div>
+	<div class="grid" id="23"><p>3</p></div>
+	<div class="grid" id="33"><p>3</p></div>
+	<div class="grid" id="43"><p>3</p></div>
+	<div class="grid" id="53"><p>3</p></div>
+	<div class="grid" id="63"><p>3</p></div>
+	<div class="grid" id="73"><p>3</p></div>
+	<div class="grid" id="83"><p>3</p></div>
+	<div class="grid" id="93"><p>3</p></div>
+
+	<!---->
+	<div class="grid" id="14"><p>4</p></div>
+	<div class="grid" id="24"><p>4</p></div>
+	<div class="grid" id="34"><p>4</p></div>
+	<div class="grid" id="44"><p>4</p></div>
+	<div class="grid" id="54"><p>4</p></div>
+	<div class="grid" id="64"><p>4</p></div>
+	<div class="grid" id="74"><p>4</p></div>
+	<div class="grid" id="84"><p>4</p></div>
+	<div class="grid" id="94"><p>4</p></div>
+
+	<!---->
+	<div class="grid" id="15"><p>5</p></div>
+	<div class="grid" id="25"><p>5</p></div>
+	<div class="grid" id="35"><p>5</p></div>
+	<div class="grid" id="45"><p>5</p></div>
+	<div class="grid" id="55"><p>5</p></div>
+	<div class="grid" id="65"><p>5</p></div>
+	<div class="grid" id="75"><p>5</p></div>
+	<div class="grid" id="85"><p>5</p></div>
+	<div class="grid" id="95"><p>5</p></div>
+
+	<!---->
+	<div class="grid" id="16"><p>6</p></div>
+	<div class="grid" id="26"><p>6</p></div>
+	<div class="grid" id="36"><p>6</p></div>
+	<div class="grid" id="46"><p>6</p></div>
+	<div class="grid" id="56"><p>6</p></div>
+	<div class="grid" id="66"><p>6</p></div>
+	<div class="grid" id="76"><p>6</p></div>
+	<div class="grid" id="86"><p>6</p></div>
+	<div class="grid" id="96"><p>6</p></div>
+
+	<!---->
+	<div class="grid" id="17"><p>7</p></div>
+	<div class="grid" id="27"><p>7</p></div>
+	<div class="grid" id="37"><p>7</p></div>
+	<div class="grid" id="47"><p>7</p></div>
+	<div class="grid" id="57"><p>7</p></div>
+	<div class="grid" id="67"><p>7</p></div>
+	<div class="grid" id="77"><p>7</p></div>
+	<div class="grid" id="87"><p>7</p></div>
+	<div class="grid" id="97"><p>7</p></div>
+
+	<!---->
+	<div class="grid" id="18"><p>8</p></div>
+	<div class="grid" id="28"><p>8</p></div>
+	<div class="grid" id="38"><p>8</p></div>
+	<div class="grid" id="48"><p>8</p></div>
+	<div class="grid" id="58"><p>8</p></div>
+	<div class="grid" id="68"><p>8</p></div>
+	<div class="grid" id="78"><p>8</p></div>
+	<div class="grid" id="88"><p>8</p></div>
+	<div class="grid" id="98"><p>8</p></div>
+
+	<!---->
+	<div class="grid" id="19"><p>9</p></div>
+	<div class="grid" id="29"><p>9</p></div>
+	<div class="grid" id="39"><p>9</p></div>
+	<div class="grid" id="49"><p>9</p></div>
+	<div class="grid" id="59"><p>9</p></div>
+	<div class="grid" id="69"><p>9</p></div>
+	<div class="grid" id="79"><p>9</p></div>
+	<div class="grid" id="89"><p>9</p></div>
+	<div class="grid" id="99"><p>9</p></div>
+
+</body>
+</html>
